@@ -24,3 +24,6 @@ class MyView(QtWidgets.QWidget):
         self.setLayout(vbox)
 
         self.setWindowTitle('TreeWidget')
+
+        self.tw = tw
+        self.btn = tw
