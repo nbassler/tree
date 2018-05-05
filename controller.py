@@ -48,14 +48,23 @@ class TreeCtrl(object):
         self.setup_callbacks(view)
 
         self.tvdx = tvdx
-        self.popup_menu = self.create_popup_menu()
+        self.popup_menu_ctx = self.create_popup_menu_ctx()
+        self.popup_menu_vdx = self.create_popup_menu_vdx()
 
-    def create_popup_menu(self):
+    def create_popup_menu_ctx(self):
         popup_menu = QMenu(self.view.tw)
-        popup_menu.addAction("New", self.menu_open)
-        popup_menu.addAction("Rename", self.menu_open)
+        popup_menu.addAction("New CTX", self.menu_open)
+        popup_menu.addAction("Rename CTX", self.menu_open)
         popup_menu.addSeparator()
-        popup_menu.addAction("Delete", self.menu_open)
+        popup_menu.addAction("Delete CTX", self.menu_open)
+        return popup_menu
+
+    def create_popup_menu_vdx(self):
+        popup_menu = QMenu(self.view.tw)
+        popup_menu.addAction("New VDX", self.menu_open)
+        popup_menu.addAction("Rename VDX", self.menu_open)
+        popup_menu.addSeparator()
+        popup_menu.addAction("Delete VDX", self.menu_open)
         return popup_menu
 
     def setup_callbacks(self, view):
@@ -68,13 +77,37 @@ class TreeCtrl(object):
         tw.customContextMenuRequested.connect(self.on_context_menu)
 
     def on_context_menu(self, pos):
-        logger.debug("on_context_menu() {}".format(pos))
         tw = self.view.tw
+
+        getSelected = tw.selectedItems()
+        if getSelected:
+
+            baseNode = getSelected[0]  # QTreeWidgetItem
+            parent = baseNode.parent()  # QTreeWidgetItem
+            getChildNode = baseNode.text(0)
+
+            logger.debug("Node name: {}".format(getChildNode))
+            if parent:
+                logger.debug("parent: {}".format(parent.text(0)))
+            else:
+                return
+
+        logger.debug("on_context_menu() {}".format(pos))
+
         logger.debug("menu_context() {}".format(pos))
         node = tw.mapToGlobal(pos)
-        action = self.popup_menu.exec_(tw.mapToGlobal(pos))
+
+        if parent.text(0) == "CTX":
+            action = self.popup_menu_ctx.exec_(tw.mapToGlobal(pos))
+
+        elif parent.text(0) == "ROIs":
+            action = self.popup_menu_vdx.exec_(tw.mapToGlobal(pos))
+
+        else:
+            return
+
         logger.debug("action: {}".format(action.text()))
-        # print(dir(action))
+        logger.debug("node: {}".format(node))
 
     def menu_open(self):
         logger.debug("menu_open()")
