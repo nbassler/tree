@@ -24,13 +24,20 @@ class TreeCtrl(object):
         tdos = QTreeWidgetItem(["DOSs"])
         tlet = QTreeWidgetItem(["LETs"])
 
-        tctx.addChild(QTreeWidgetItem([model.ctx]))
+        tctx.setCheckState(0, Qt.Checked)
 
-        for item in model.vdx:
+        # tctx.addChild(QTreeWidgetItem([model.ctx]))
+
+        for i, item in enumerate(model.vdx):
+            # child = QTreeWidgetItem(parent)
             tvdx.addChild(QTreeWidgetItem([item]))
+            child = tvdx.child(i)
+            child.setCheckState(i, Qt.Checked)
 
-        for item in model.dos:
+        for i, item in enumerate(model.dos):
             tdos.addChild(QTreeWidgetItem([item]))
+            child = tdos.child(i)
+            child.setCheckState(i, Qt.Checked)
 
         for item in model.let:
             tlet.addChild(QTreeWidgetItem([item]))
