@@ -49,12 +49,12 @@ class TreeCtrl(object):
 
     def setup_callbacks(self, view):
         logger.debug("setup_callbacks()")
-        view.btn.clicked.connect(self.add_data)
-        view.btn.clicked.connect(self.odd_doto)
+        view.btn.clicked.connect(lambda: self.add_data())
+        # view.btn.clicked.connect(self.odd_doto)
 
     @staticmethod
-    def odd_doto(self):
-        logger.debug("odd_doto()")
+    def odd_doto(event):
+        logger.debug("odd_doto() {}".format(event))
 
     def add_data(self):
         logger.debug("add_data()")
