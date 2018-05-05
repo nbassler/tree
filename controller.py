@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 class TreeCtrl(object):
 
     def __init__(self, model, view):
+
+        self.model = model
+        self.view = view
+
         tw = view.tw
 
         tw.setHeaderLabels(['MyTest'])
@@ -39,11 +43,23 @@ class TreeCtrl(object):
         tdos.setExpanded(True)
         tlet.setExpanded(True)
 
-    def setup_callbacks():
-        pass
+        self.setup_callbacks(view)
 
-    def add_data():
-        pass
+        self.tvdx = tvdx
+
+    def setup_callbacks(self, view):
+        logger.debug("setup_callbacks()")
+        view.btn.clicked.connect(self.add_data)
+        view.btn.clicked.connect(self.odd_doto)
+
+    @staticmethod
+    def odd_doto(self):
+        logger.debug("odd_doto()")
+
+    def add_data(self):
+        logger.debug("add_data()")
+        # self.model.vdx.append("Smerg")
+        # self.tvdx.addChile(QTreeWidgetItem(["Smerg"]))
 
     def update_tree():
         pass

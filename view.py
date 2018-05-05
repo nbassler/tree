@@ -26,4 +26,4 @@ class MyView(QtWidgets.QWidget):
         self.setWindowTitle('TreeWidget')
 
         self.tw = tw
-        self.btn = tw
+        self.btn = btn
