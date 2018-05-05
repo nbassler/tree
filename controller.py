@@ -1,6 +1,6 @@
 import logging
 
-from PyQt5 import QtGui
+# from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTreeWidgetItem
 from PyQt5.QtWidgets import QMenu
@@ -32,12 +32,12 @@ class TreeCtrl(object):
             # child = QTreeWidgetItem(parent)
             tvdx.addChild(QTreeWidgetItem([item]))
             child = tvdx.child(i)
-            child.setCheckState(i, Qt.Checked)
+            child.setCheckState(0, Qt.Checked)
 
         for i, item in enumerate(model.dos):
             tdos.addChild(QTreeWidgetItem([item]))
             child = tdos.child(i)
-            child.setCheckState(i, Qt.Checked)
+            child.setCheckState(0, Qt.Checked)
 
         for item in model.let:
             tlet.addChild(QTreeWidgetItem([item]))
@@ -123,6 +123,8 @@ class TreeCtrl(object):
         logger.debug("add_data()")
         self.model.vdx.append("Smerg")
         self.tvdx.addChild(QTreeWidgetItem(["Smerg"]))
+        child = self.tvdx.child(self.tvdx.childCount() - 1)  # get the ref to last added chiled
+        child.setCheckState(0, Qt.Unchecked)
 
     def update_tree():
         pass
