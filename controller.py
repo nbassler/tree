@@ -58,8 +58,8 @@ class TreeCtrl(object):
 
     def add_data(self):
         logger.debug("add_data()")
-        # self.model.vdx.append("Smerg")
-        # self.tvdx.addChile(QTreeWidgetItem(["Smerg"]))
+        self.model.vdx.append("Smerg")
+        self.tvdx.addChild(QTreeWidgetItem(["Smerg"]))
 
     def update_tree():
         pass
